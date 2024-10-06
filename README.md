@@ -15,7 +15,7 @@ year = {2024}}
 
 
 # Setup
-1/ Install required packages:
+Install required packages:
 ```
 conda create -n dichavit python=3.10 -y
 conda activate dichavit
@@ -26,10 +26,10 @@ pip install -r requirements.txt
 
 # Dataset
 
-After downloading the datasets, you need to update the paths in the config files `configs/dataset/`.
+After downloading the following datasets, you need to update the paths in the config files `configs/dataset/`.
 
 ## 1. CHAMMI
-### 1.1 Download 
+### 1.1. Download 
 The dataset can be downloaded from https://doi.org/10.5281/zenodo.7988357
 
 
@@ -41,7 +41,7 @@ More detail about the dataset can be found [here](https://github.com/chaudatasci
 ## 2. JUMP-CP
 
 You can refer to [the dataset repo](https://github.com/insitro/ContextViT) for further details. 
-But here is a quick start.
+Here's a quick overview to help you get started.
 
 The processed data is stored in an S3 bucket as follows:
 ```
@@ -59,7 +59,7 @@ s3://insitro-research-2023-context-vit
     └──  BR00117000.pq
 ```
 We conduct experiments on the **BR00116991** dataset, which requires downloading `platemap_and_metadata/`, `BR00116991/` folders, and `BR00116991.pq`.
-First, you need to install [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), then run these commands in the Terminal:
+First, you need to install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), then run these commands in the Terminal:
 ```
 aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/platemap_and_metadata jumpcp/platemap_and_metadata --recursive --no-sign-request
 aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/BR00116991 jumpcp/BR00116991 --recursive --no-sign-request
@@ -98,7 +98,7 @@ python main.py -m -cn chammi_cfg model=dichavit ++model.enable_sample=True ++mod
 ```
 
 
-To reproduce the results, please refer to [train_scripts.txt](https://github.com/chaudatascience/diverse_channel_vit/blob/main/train_scripts.txt).
+To reproduce the results, please refer to [train_scripts.sh](https://github.com/chaudatascience/diverse_channel_vit/blob/main/train_scripts.sh).
 
 **Add Wandb key**: If you would like to use Wandb to keep track of experiments, add your Wandb key to `.env` file:
 
