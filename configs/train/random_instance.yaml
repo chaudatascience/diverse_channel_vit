@@ -1,0 +1,27 @@
+batch_strategy: random_instance 
+resume_train: False
+resume_model: ~   # used when `resume_train` is True, eg., checkpoints/jump_cp/2024-Mar-30-02-48-49--jobid5771799_seed850053/model_last.pt
+use_amp: False   #  mixed precision training
+checkpoints: checkpoints
+save_model: last # "all", "best", or "last", or a number 'n' to save every n epochs
+clip_grad_norm: ~   # or ~ to NOT use
+batch_size: 64 # batch_size vs. num_classes?
+num_epochs: 40
+verbose_batches: 50
+seed: ~  # if ~, will generate a random number for the seed
+debug: False
+adaptive_interface_epochs: 0 # set to 0 to disable
+adaptive_interface_lr: ~  # if ~, will use  100x of the fine-tuning lr
+swa: False
+swad: False
+swa_lr: 0.05
+swa_start: 5
+miro: False
+miro_lr_mult: 10.0
+miro_ld: 0.01
+tps_prob: 0.0   ## TPS transformation. 0 means disable. To use, set a value in (0, 1]
+ssl: False  ## self-supervised loss
+ssl_lambda: 0.0  ## lambda to balance the self-supervised loss with the main loss
+training_chunks: ~  # if ~, will use all chunks
+extra_loss_lambda: 0.0  # lambda to balance the channel proxy loss with the main loss
+plot_attn: False

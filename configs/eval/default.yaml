@@ -1,0 +1,20 @@
+batch_size: ~  ## None to auto set
+dest_dir: snapshots/results/{FOLDER_NAME}/results
+feature_dir: snapshots/feat_outputs/{FOLDER_NAME}/features
+root_dir: /projectnb/morphem/data_70k/ver2/morphem_70k_version2/
+meta_csv_file: FILL_LATER
+classifiers:
+  - knn
+classifier: PLACE_HOLDER
+feature_file: features.npy
+use_gpu: True
+knn_metric: PLACE_HOLDER
+knn_metrics:
+  - cosine
+clean_up: True
+umap: False
+only_eval_first_and_last: False
+skip_eval_for_debug: False
+every_n_epochs: 5 # evaluate every n epochs
+eval_subset_channels: False
+channel_combinations: ~

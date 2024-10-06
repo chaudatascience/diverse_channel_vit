@@ -1,0 +1,3 @@
+num_workers: 6
+device: cuda    # "cuda:0"  ## cuda whose idx is 0
+multi_gpus: DataParallel # "DataParallel"  # {ddp, DataParallel, None}

@@ -1,0 +1,6 @@
+chunks:
+  - jump_cp:
+      train: [0, 1, 2, 3, 4, 5, 6, 7]
+      valid: [0, 1, 2, 3, 4, 5, 6, 7] ## different split compared to test
+      test: [0, 1, 2, 3, 4, 5, 6, 7]
+        

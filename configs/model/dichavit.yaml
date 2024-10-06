@@ -1,0 +1,31 @@
+name: dichavit
+pretrained: False
+pretrained_model_name: "small"  ## https://github.com/facebookresearch/dinov2
+in_dim: ~  # autofill later if None
+num_classes: ~ # autofill later if None
+pooling: "avg"
+temperature: 0.11111
+learnable_temp: False
+unfreeze_last_n_layers: -1
+unfreeze_first_layer: True
+init_first_layer: ~ ## not used
+reset_last_n_unfrozen_layers: False
+enable_sample: False
+in_channel_names: FILL_LATER
+new_channel_inits: ~ # ["avg_2", "replicate", "avg_2_not_in_chunk", "avg_3", "avg_3_not_in_chunk", "zero", "ignore"]
+use_channelvit_channels: True
+patch_size: 16
+orthogonal_channel_emb_init: False
+dropout_tokens_hcs: none
+freeze_channel_emb: False
+keep_rate: ~
+block_type: block
+hcs_sampling: none
+hcs_sampling_temp: 0.1
+proxy_loss_lambda: 0
+ortho_loss_v1_lambda: 0
+drop_path_rate: 0.0
+gamma_s: 1.0
+gamma_d: 0.5
+reverse_pos_pairs: False
+use_square: False

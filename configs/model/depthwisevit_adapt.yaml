@@ -1,0 +1,17 @@
+name: depthwisevit_adapt
+pretrained: False
+pretrained_model_name: "small"  ## https://github.com/facebookresearch/dinov2
+in_dim: ~  # autofill later if None
+num_classes: ~ # autofill later if None
+pooling: "avg"
+temperature: 0.11111
+learnable_temp: False
+unfreeze_last_n_layers: -1
+unfreeze_first_layer: True
+init_first_layer: ~ ## not used
+reset_last_n_unfrozen_layers: False
+enable_sample: False
+in_channel_names: ['er','golgi','membrane','microtubules','mito', 'nucleus', 'protein', 'rna']
+new_channel_inits: ~ # ["avg_2", "replicate", "avg_2_not_in_chunk", "avg_3", "avg_3_not_in_chunk", "zero", "ignore"]
+use_channelvit_channels: True
+patch_size: 16
