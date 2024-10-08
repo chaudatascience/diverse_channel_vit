@@ -16,19 +16,6 @@ from torch import nn
 import pprint
 import os
 
-
-def profile(func):
-    @wraps(func)
-    def wrap(*args, **kwargs):
-        profiler.add_function(func)
-        profiler.enable_by_count()
-        res = func(*args, **kwargs)
-        profiler.print_stats()
-        return res
-
-    return wrap
-
-
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 ############ Device, GPU, Mem, Cuda ############
 

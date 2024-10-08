@@ -1,7 +1,6 @@
 name: jump_cp
 img_size: 224
-# cyto_mask_path_list: /projectnb/ivc-ml/chaupham/ChannelViT/data/jumpcp/BR00116991.pq
 
 file_name: ~ ## not used
 in_channel_names: [0, 1, 2, 3, 4, 5, 6, 7]
-root_dir: /projectnb/ivc-ml/chaupham/ChannelViT/data/
+root_dir: /projectnb/ivc-ml/chaupham/ChannelViT/data/   ### folder containing the JUMP-CP dataset

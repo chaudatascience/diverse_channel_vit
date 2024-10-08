@@ -40,7 +40,7 @@ More detail about the dataset can be found [here](https://github.com/chaudatasci
 
 ## 2. JUMP-CP
 
-You can refer to [the dataset repo](https://github.com/insitro/ContextViT) for further details. 
+You can refer to [insitro's dataset repo](https://github.com/insitro/ContextViT) for further details. 
 Here's a quick overview to help you get started.
 
 The processed data is stored in an S3 bucket as follows:
@@ -110,3 +110,7 @@ and, change `use_wandb` to `True` in `configs/logging/wandb.yaml`, or set `++log
 # Checkpoints
 
 The model checkpoints for DiChaViT can be found [here](https://drive.google.com/drive/folders/1o9t_vRTbg-933UCQx3OKSI22O4U4h8F0?usp=drive_link).
+
+# Acknowledgements
+ - ChannelViT model, and dataloaders for So2Sat and JUMP-CP are adapted from [ChannelViT](https://github.com/insitro/ChannelViT) 
+- CHAMMI's baseline models, dataloader, and evaluation benchmark are from [CHAMMI](https://github.com/chaudatascience/channel_adaptive_models), [MorphEm](https://github.com/broadinstitute/MorphEm)

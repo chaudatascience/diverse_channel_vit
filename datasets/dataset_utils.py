@@ -15,7 +15,6 @@ import utils
 from utils import default
 from datasets.morphem70k import SingleCellDataset
 from datasets.so2sat import So2Sat
-from datasets.cifar import CifarRandomInstance
 from datasets.tps_transform import TPSTransform, dummy_transform
 from datasets.jump_cp_transforms import CellAugmentation
 from datasets.jump_cp import JUMPCP
@@ -529,7 +528,7 @@ def get_train_val_test_loaders(
         train_loader = DataLoader(
             train_set,
             batch_size=batch_size,
-             shuffle=False if use_ddp else True,
+            shuffle=False if use_ddp else True,
             num_workers=num_workers,
             worker_init_fn=utils.worker_init_fn,
             pin_memory=True,

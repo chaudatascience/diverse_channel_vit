@@ -6,9 +6,9 @@ from utils import pairwise_distance_v2
 
 def proxy_loss(proxies, img_emb, gt_imgs, scale: float | nn.Parameter) -> Tensor:
     """
-    proxies: (num_classes, dim)
-    img_emb: (num_imgs, dim)
-    gt_imgs: (num_imgs)
+    proxies: shape of (num_classes, dim)
+    img_emb: shape of (num_imgs, dim)
+    gt_imgs: shape of (num_imgs)
     """
     proxies_emb = scale * F.normalize(proxies, p=2, dim=-1)
     img_emb = scale * F.normalize(img_emb, p=2, dim=-1)
@@ -23,11 +23,10 @@ def proxy_loss(proxies, img_emb, gt_imgs, scale: float | nn.Parameter) -> Tensor
 
 def ortho_proj_loss_fn_v2(features, labels, gamma_s, gamma_d, reverse_pos_pairs: bool, use_square: bool):
     """
-    features: b, num_tokens, d
-    labels: num_tokens
-    gamma_s: default 1.0
-    gamma_d: default 0.5
-    reverse_pos_pairs: default False. If true, we want each token to be orthogonal to all other tokens, regarless of their channels.
+    features: shape (b, num_tokens, d)
+    labels: shape (num_tokens)
+    gamma_s, gamma_d: lambda_s and lambda_d in E.q (2) and (3) in the paper
+    reverse_pos_pairs: If true, we want each token to be orthogonal to all other tokens, regarless of their channels.
     """
     device = features.device
     #  features are normalized

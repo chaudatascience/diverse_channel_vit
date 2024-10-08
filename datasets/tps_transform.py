@@ -19,9 +19,7 @@ from torchvision import datasets
 # related blog: https://medium.com/@fanzongshaoxing/image-augmentation-based-on-3d-thin-plate-spline-tps-algorithm-for-ct-data-fa8b1b2a683c
 
 
-def warp_images(
-    from_points, to_points, images, output_region, interpolation_order=1, approximate_grid=10
-):
+def warp_images(from_points, to_points, images, output_region, interpolation_order=1, approximate_grid=10):
     """Define a thin-plate-spline warping transform that warps from the from_points
     to the to_points, and then warp the given images by that transform. This
     transform is described in the paper: "Principal Warps: Thin-Plate Splines and
@@ -42,9 +40,7 @@ def warp_images(
     """
     transform = _make_inverse_warp(from_points, to_points, output_region, approximate_grid)
     return [
-        ndimage.map_coordinates(
-            np.asarray(image), transform, order=interpolation_order, mode="reflect"
-        )
+        ndimage.map_coordinates(np.asarray(image), transform, order=interpolation_order, mode="reflect")
         for image in images
     ]
 
@@ -76,16 +72,12 @@ def _make_inverse_warp(from_points, to_points, output_region, approximate_grid):
         t01 = transform[0][(x_indices, iy1)]
         t10 = transform[0][(ix1, y_indices)]
         t11 = transform[0][(ix1, iy1)]
-        transform_x = (
-            t00 * x1 * y1 + t01 * x1 * y_fracs + t10 * x_fracs * y1 + t11 * x_fracs * y_fracs
-        )
+        transform_x = t00 * x1 * y1 + t01 * x1 * y_fracs + t10 * x_fracs * y1 + t11 * x_fracs * y_fracs
         t00 = transform[1][(x_indices, y_indices)]
         t01 = transform[1][(x_indices, iy1)]
         t10 = transform[1][(ix1, y_indices)]
         t11 = transform[1][(ix1, iy1)]
-        transform_y = (
-            t00 * x1 * y1 + t01 * x1 * y_fracs + t10 * x_fracs * y1 + t11 * x_fracs * y_fracs
-        )
+        transform_y = t00 * x1 * y1 + t01 * x1 * y_fracs + t10 * x_fracs * y1 + t11 * x_fracs * y_fracs
         transform = [transform_x, transform_y]
     return transform
 
@@ -161,9 +153,7 @@ def _thin_plate_spline_warp(image, src_points, dst_points, keep_corners=True):
         corner_points = np.array([[0, 0], [0, width], [height, 0], [height, width]])
         src_points = np.concatenate((src_points, corner_points))
         dst_points = np.concatenate((dst_points, corner_points))
-    out = warp_images(
-        src_points, dst_points, np.moveaxis(image, 2, 0), (0, 0, width - 1, height - 1)
-    )
+    out = warp_images(src_points, dst_points, np.moveaxis(image, 2, 0), (0, 0, width - 1, height - 1))
     return np.moveaxis(np.array(out), 0, 2)
 
 
@@ -264,7 +254,6 @@ def _test_tps_transform(
 
         channel_width = 200
         image = skimage.io.imread(img_path)
-        # breakpoint()
         image = np.reshape(image, (image.shape[0], channel_width, -1), order="F")
     else:
         # Read an normal RGB image (e.g., the cat img)
@@ -279,19 +268,13 @@ def _test_tps_transform(
     transform_train = transforms.Compose(
         [
             TPSTransform(p=prob) if use_tps else no_transform,
-            transforms.RandomResizedCrop(
-                img_size, scale=(1.0, 1.0), ratio=(1.0, 1.0), antialias=True
-            ),
+            transforms.RandomResizedCrop(img_size, scale=(1.0, 1.0), ratio=(1.0, 1.0), antialias=True),
         ]
     )
-
-    # image_array = np.asarray(image)
-    # print("PIL shape after transforming into numpy", image_array.shape)
 
     image = torchvision.transforms.ToTensor()(image)
     print("image shape here is", image.shape)
     transformed_img = transform_train(image)
-    # plt.imshow(transformed_img.permute(1, 2, 0))
     ## save the image
     torchvision.utils.save_image(transformed_img[:3, ...], new_img_name)
     print("wrote transformed image to", new_img_name)
@@ -302,9 +285,6 @@ if __name__ == "__main__":
     n_imgs = 10
     prob = 1
     use_tps = True
-    # img_path = "cat_img/a_cat.png"
-    # new_img_path = "cat_img/a_cat_transformed_{i}.png"
-    # final_img = f"cat_img/all_transformed_useTPS{use_tps}_prob{prob}.png"
 
     img_path = "chammi_sample_img/chammi_pic.png"
     new_img_path = "chammi_sample_img/chammi_transformed_{i}.png"

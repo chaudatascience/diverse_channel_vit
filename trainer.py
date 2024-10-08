@@ -813,7 +813,7 @@ class Trainer:
         # utils.gpu_mem_report()
         self.logger.info(f"Done training epoch {epoch} in {(time.time() - start) / 60:.2f} minutes")
 
-        if isinstance(self.model, (DepthwiseConvNeXt, DepthwiseViTAdapt, DepthwiseConvNeXtV2)) and hasattr(
+        if isinstance(self.model, (DepthwiseConvNeXt, DepthwiseViTAdapt)) and hasattr(
             self.model, "weighted_sum_pooling"
         ):
             for i, w_i in enumerate(self.model.weighted_sum_pooling):

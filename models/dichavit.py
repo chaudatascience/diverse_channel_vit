@@ -25,7 +25,6 @@ import torch.distributed as dist
 import torch.nn as nn
 import os
 import sys
-from utils import get_gpu_mem, pretty_print_tensor
 from models.loss_fn import *
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

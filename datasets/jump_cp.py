@@ -4,17 +4,12 @@ import numpy as np
 import pandas as pd
 import torch
 import os
-from omegaconf import DictConfig, ListConfig
-from tqdm import tqdm
+from omegaconf import ListConfig
 from torch.utils.data.dataloader import default_collate
-
 from torch.utils.data import Dataset
-## get cur machine name
-import socket
-cur_machine = socket.gethostname()
 
 
-def load_meta_data():
+def load_meta_data(base_path: str):
     PLATE_TO_ID = {"BR00116991": 0, "BR00116993": 1, "BR00117000": 2}
     FIELD_TO_ID = dict(zip([str(i) for i in range(1, 10)], range(9)))
     WELL_TO_ID = {}
@@ -24,11 +19,6 @@ def load_meta_data():
             WELL_TO_ID[well_loc] = len(WELL_TO_ID)
 
     WELL_TO_LBL = {}
-    # map the well location to the perturbation label
-    base_path = "/projectnb/ivc-ml/chaupham/ChannelViT/data/jumpcp/platemap_and_metadata"
-    if cur_machine == 'goat.bu.edu':
-        base_path = "/scratch/chaupham/jumpcp/platemap_and_metadata"
-    # "s3://insitro-research-2023-context-vit/jumpcp/platemap_and_metadata"
 
     PLATE_MAP = {
         "compound": f"{base_path}/JUMP-Target-1_compound_platemap.tsv",
@@ -76,18 +66,15 @@ class JUMPCP(Dataset):
         channel_mask: bool = False,
         scale: float = 1,
         perturbation_list: ListConfig[str] = ["compound"],
-        cyto_mask_path_list: ListConfig[str] = None
+        cyto_mask_path_list: ListConfig[str] = None,
     ) -> None:
         """Initialize the dataset."""
         self.root_dir = path
-        if cur_machine == 'goat.bu.edu':
-            self.root_dir = "/scratch/chaupham/"
         if cyto_mask_path_list is None:
             cyto_mask_path_list = [os.path.join(self.root_dir, "jumpcp/BR00116991.pq")]
         # read the cyto mask df
         df = pd.concat([pd.read_parquet(path) for path in cyto_mask_path_list], ignore_index=True)
         df = self.get_split(df, split)
-       
 
         self.data_path = list(df["path"])
         self.data_id = list(df["ID"])
@@ -113,7 +100,8 @@ class JUMPCP(Dataset):
 
         self.transform = transform
 
-        self.plate2id, self.field2id, self.well2id, self.well2lbl = load_meta_data()
+        meta_data_path = os.path.join(self.root_dir, "jumpcp/platemap_and_metadata")
+        self.plate2id, self.field2id, self.well2id, self.well2lbl = load_meta_data(meta_data_path)
 
         self.channel_mask = channel_mask
 

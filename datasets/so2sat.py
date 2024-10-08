@@ -2,22 +2,15 @@ import os
 from typing import Callable, Dict, Union
 
 import numpy as np
-import pandas as pd
-import torchvision
 import torch
-import random
-import skimage.io
 
 from typing import List, Union
 import h5py
 import numpy as np
 from omegaconf import DictConfig
-from torch import Tensor
 from torch.utils.data.dataloader import default_collate
 from torch.utils.data import Dataset
 import socket
-
-cur_machine = socket.gethostname()
 
 
 class So2Sat(Dataset):
@@ -31,9 +24,6 @@ class So2Sat(Dataset):
     ) -> None:
         """Initialize the dataset."""
         super().__init__()
-
-        if cur_machine == "goat.bu.edu":
-            path = "/scratch/chaupham/first_version/m1454690"
 
         self.channels = torch.tensor([c for c in channels])
 
