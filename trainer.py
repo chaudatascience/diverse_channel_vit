@@ -576,7 +576,7 @@ class Trainer:
                     call_umap,
                     eval_cfg["use_gpu"],
                     knn_metric,
-                    dataset,  # quick hack to run benchmark on only 1 dataset
+                    #dataset,  # quick hack to run benchmark on only 1 dataset
                 )
                 ## log results
                 full_res["key"] = full_res.iloc[:, 0:3].apply(lambda x: "/".join(x.astype(str)), axis=1)
@@ -610,7 +610,7 @@ class Trainer:
                     call_umap,
                     eval_cfg["use_gpu"],
                     knn_metric,
-                    dataset,  # quick hack to run benchmark on only 1 dataset
+                    #dataset,  # quick hack to run benchmark on only 1 dataset
                 )
                 ## log results
                 full_res["key"] = full_res.iloc[:, 0:3].apply(lambda x: "/".join(x.astype(str)), axis=1)
