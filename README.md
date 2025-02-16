@@ -67,7 +67,7 @@ aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/BR00116991.pq jumpcp/BR0
 ```
 
 ## 3. So2Sat 
-We use the city split (version 1) of the So2Sat dataset. The dataset can be downloaded by running
+We use the city split (version 2) of the So2Sat dataset. The dataset can be downloaded by running
 
 ```
 wget --no-check-certificate https://dataserv.ub.tum.de/s/m1454690/download?path=%2F&files=validation.h5&downloadStartSecret=p5bjok57fil
