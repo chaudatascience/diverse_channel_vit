@@ -28,13 +28,15 @@ class So2Sat(Dataset):
         self.channels = torch.tensor([c for c in channels])
 
         self.transform = transform
-        ## read h5py file from `path`
+        ## read h5py file from `path` (update: city split w/ version 2)
         if split == "train":
             path = os.path.join(path, "training.h5")
-        else:  ## we use the same validation set for both validation and test.
-            ## for validation, we use some channels.
-            ## for test, we use all channels.
+        elif split == "valid":
             path = os.path.join(path, "validation.h5")
+        elif split == "test":
+            path = os.path.join(path, "testing.h5")
+        else:
+            raise ValueError(f"split must be either train, valid, or test, got {split}")
         self.file = h5py.File(path, "r")
         self.path = path
 
