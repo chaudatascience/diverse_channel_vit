@@ -34,13 +34,20 @@ The dataset can be downloaded from https://doi.org/10.5281/zenodo.7988357
 
 
 ### 1.2. Install evaluation package
-To run evaluation, we need to install the evaluation package: https://github.com/broadinstitute/MorphEm
+To evaluate the representation learning tasks on CHAMMI benchmark, we need [morphem](https://github.com/broadinstitute/MorphEm) package, which is already included in this repo.
+That said, we still need to install FAISS library for fast nearest neighbor search used in the evaluation.
+You can install FAISS by running:
+```
+conda install -c pytorch faiss-gpu -y
+```
 
-More detail about the dataset can be found [here](https://github.com/chaudatascience/channel_adaptive_models?tab=readme-ov-file#dataset).
+More information about the dataset is available [here](https://github.com/chaudatascience/channel_adaptive_models?tab=readme-ov-file#dataset), and the Morphem evaluation package can be found [here](https://github.com/broadinstitute/MorphEm).
+
+
 
 ## 2. JUMP-CP
 
-You can refer to [insitro's dataset repo](https://github.com/insitro/ContextViT) for further details. 
+
 Here's a quick overview to help you get started.
 
 The processed data is stored in an S3 bucket as follows:
@@ -65,6 +72,9 @@ aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/platemap_and_metadata ju
 aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/BR00116991 jumpcp/BR00116991 --recursive --no-sign-request
 aws s3 cp s3://insitro-research-2023-context-vit/jumpcp/BR00116991.pq jumpcp/BR00116991.pq --no-sign-request
 ```
+
+
+Please refer to [insitro's dataset repo](https://github.com/insitro/ContextViT) for further details. 
 
 ## 3. So2Sat 
 We use the city split (version 2) of the So2Sat dataset. The dataset can be downloaded by running
@@ -114,3 +124,22 @@ The model checkpoints for DiChaViT can be found [here](https://drive.google.com/
 # Acknowledgements
  - ChannelViT model, and dataloaders for So2Sat and JUMP-CP are adapted from [ChannelViT](https://github.com/insitro/ChannelViT) 
 - CHAMMI's baseline models, dataloader, and evaluation benchmark are from [CHAMMI](https://github.com/chaudatascience/channel_adaptive_models), [MorphEm](https://github.com/broadinstitute/MorphEm)
+
+
+## Troubleshooting
+Numpy related errors:
+
+*"File "h5py/_errors.pyx", line 1, in init h5py._errors
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject"*
+
+or
+
+*"ModuleNotFoundError: No module named 'numpy._core'"*
+
+It's likely there are multiple numpy versions installed in your environment.
+To fix this, please run:
+
+```
+pip uninstall numpy ## run twice to make sure numpy is completely uninstalled
+pip install numpy==1.26.4
+```
